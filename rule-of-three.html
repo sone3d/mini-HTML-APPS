@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule of 3 Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 80px;
+            margin: 5px;
+        }
+        button {
+            padding: 5px 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rule of 3 Calculator</h1>
+    <p>If <input type="number" id="a" value="1"> is to <input type="number" id="b" value="2">,</p>
+    <p>then <input type="number" id="c" value="3"> is to <input type="number" id="d" readonly>.</p>
+    <button onclick="calculateRuleOf3()">Calculate</button>
+
+    <script>
+        function calculateRuleOf3() {
+            const a = parseFloat(document.getElementById("a").value);
+            const b = parseFloat(document.getElementById("b").value);
+            const c = parseFloat(document.getElementById("c").value);
+            const d = document.getElementById("d");
+
+            if (!isNaN(a) && !isNaN(b) && !isNaN(c)) {
+                const result = (b * c) / a;
+                d.value = result.toFixed(2);
+            } else {
+                alert("Please enter valid numbers!");
+            }
+        }
+    </script>
+</body>
+</html>
 
