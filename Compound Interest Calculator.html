@@ -2,19 +2,51 @@
 <html>
 <head>
     <title>Compound Interest Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        input[type="number"],
+        input[type="button"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <h1>Compound Interest Calculator</h1>
     <form>
-        <label for="principal">Investment:</label>
-        <input type="number" id="principal" step="any" required><br><br>
+        <label for="principal">Principal Amount:</label>
+        <input type="number" id="principal" step="any" required><br>
         <label for="rate">Annual Interest Rate:</label>
-        <input type="number" id="rate" step="any" required><br><br>
-        <label for="time">Years:</label>
-        <input type="number" id="time" step="any" required><br><br>
-        <input type="button" value="Calculate" onclick="calculateInterest()"><br><br>
+        <input type="number" id="rate" step="any" required><br>
+        <label for="time">Time (in years):</label>
+        <input type="number" id="time" step="any" required><br>
+        <input type="button" value="Calculate" onclick="calculateInterest()"><br>
         <label for="result">Compound Interest:</label>
-        <input type="text" id="result" disabled><br><br>
+        <input type="text" id="result" disabled><br>
         <label for="total">Total Balance:</label>
         <input type="text" id="total" disabled>
     </form>
