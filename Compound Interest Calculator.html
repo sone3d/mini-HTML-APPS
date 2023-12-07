@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Compound Interest Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
             box-sizing: border-box;
@@ -30,8 +31,14 @@
 
         input[type="button"] {
             background-color: #4CAF50;
-            color: #fff;
+            color: white;
             cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
