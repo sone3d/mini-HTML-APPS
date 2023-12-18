@@ -6,52 +6,28 @@
     <title>Rule of 3 Calculator</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         input[type="number"] {
-            width: 100px;
-            padding: 10px;
-            margin: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            width: 80px;
+            margin: 5px;
         }
         button {
-            padding: 10px 15px;
-            margin: 20px;
+            padding: 5px 10px;
+            margin: 10px;
             cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Rule of 3 Calculator</h1>
-        <p>If <input type="number" id="a"> -> <input type="number" id="b"></p>
-        <p>Then <input type="number" id="c"> -> <input type="number" id="d" readonly></p>
-        <button id="calculateButton">Calculate</button>
-    </div>
+    <h1>Rule of 3 Calculator</h1>
+    <p>If <input type="number" id="a" value=""> -> <input type="number" id="b" value=""></p>
+    <p>then <input type="number" id="c" value=""> -> <input type="number" id="d" readonly></p>
+    <button onclick="calculateRuleOf3()">Calculate</button>
 
     <script>
-        document.getElementById('calculateButton').addEventListener('click', function() {
+        function calculateRuleOf3() {
             const a = parseFloat(document.getElementById("a").value);
             const b = parseFloat(document.getElementById("b").value);
             const c = parseFloat(document.getElementById("c").value);
@@ -59,11 +35,11 @@
 
             if (!isNaN(a) && !isNaN(b) && !isNaN(c)) {
                 const result = (b * c) / a;
-                d.value = result.toFixed(2);
+                d.value = result.toFixed(6);
             } else {
                 alert("Please enter valid numbers!");
             }
-        });
+        }
     </script>
 </body>
 </html>
