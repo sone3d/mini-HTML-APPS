@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Prices</title>
+</head>
+<body>
+
+    
+    <p>BTC (x 0.3528): $<span id="btc-price">Loading...</span></p>
+    <p>ETH (x 6.8750): $<span id="eth-price">Loading...</span></p>
+    <p>BNB (x 1.1536): $<span id="bnb-price">Loading...</span></p>
+
+    <h2>Total: $<span id="total-price">Calculating...</span></h2>
+    <p>Total x 2: $<span id="total-multiplied-2">Calculating...</span></p>
+    <p>Total x 3: $<span id="total-multiplied-3">Calculating...</span></p>
+    <p>Total x 4: $<span id="total-multiplied-4">Calculating...</span></p>
+    <p>Total x 5: $<span id="total-multiplied-5">Calculating...</span></p>
+
+    <script>
+        function fetchPrices() {
+            fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin&vs_currencies=usd')
+                .then(response => response.json())
+                .then(data => {
+                    // Multiply Bitcoin price by 0.3528
+                    const btcPrice = data.bitcoin.usd * 0.3528;
+                    document.getElementById('btc-price').textContent = Math.floor(btcPrice);
+
+                    // Multiply Ethereum price by 6.87500
+                    const ethPrice = data.ethereum.usd * 6.8750;
+                    document.getElementById('eth-price').textContent = Math.floor(ethPrice);
+
+                    // Multiply BNB price by 1.153
+                    const bnbPrice = data.binancecoin.usd * 1.1536;
+                    document.getElementById('bnb-price').textContent = Math.floor(bnbPrice);
+
+                    // Calculate the total of the modified prices
+                    const totalPrice = btcPrice + ethPrice + bnbPrice;
+                    document.getElementById('total-price').textContent = Math.floor(totalPrice);
+
+                    // Calculate and display total multiplied by 2, 3, 4, and 5
+                    document.getElementById('total-multiplied-2').textContent = Math.floor(totalPrice * 2);
+                    document.getElementById('total-multiplied-3').textContent = Math.floor(totalPrice * 3);
+                    document.getElementById('total-multiplied-4').textContent = Math.floor(totalPrice * 4);
+                    document.getElementById('total-multiplied-5').textContent = Math.floor(totalPrice * 5);
+                })
+                .catch(error => {
+                    document.getElementById('btc-price').textContent = 'Error';
+                    document.getElementById('eth-price').textContent = 'Error';
+                    document.getElementById('bnb-price').textContent = 'Error';
+                    document.getElementById('total-price').textContent = 'Error';
+                    document.getElementById('total-multiplied-2').textContent = 'Error';
+                    document.getElementById('total-multiplied-3').textContent = 'Error';
+                    document.getElementById('total-multiplied-4').textContent = 'Error';
+                    document.getElementById('total-multiplied-5').textContent = 'Error';
+                });
+        }
+
+        window.onload = fetchPrices;
+        setInterval(fetchPrices, 60000);
+    </script>
+
+</body>
+</html>
