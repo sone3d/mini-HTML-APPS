@@ -3,62 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Prices</title>
+    <title>Wallet</title>
 </head>
 <body>
 
+    <h1>Wallet</h1>
+    <div id="price-btc">Loading BTC...</div>
+    <div id="price-eth">Loading ETH...</div>
+    <div id="price-bnb">Loading BNB...</div>
     
-    <p>BTC (x 0.3528): $<span id="btc-price">Loading...</span></p>
-    <p>ETH (x 6.8750): $<span id="eth-price">Loading...</span></p>
-    <p>BNB (x 1.1536): $<span id="bnb-price">Loading...</span></p>
-
-    <h2>Total: $<span id="total-price">Calculating...</span></h2>
-    <p>Total x 2: $<span id="total-multiplied-2">Calculating...</span></p>
-    <p>Total x 3: $<span id="total-multiplied-3">Calculating...</span></p>
-    <p>Total x 4: $<span id="total-multiplied-4">Calculating...</span></p>
-    <p>Total x 5: $<span id="total-multiplied-5">Calculating...</span></p>
+    <br> <!-- Line break before total -->
+    
+    <div id="total" style="font-weight: bold;">TOTAL: = Loading...</div>
+    <div id="total-x2">TOTAL x2: Loading...</div>
+    <div id="total-x3">TOTAL x3: Loading...</div>
+    <div id="total-x4">TOTAL x4: Loading...</div>
+    <div id="total-x5">TOTAL x5: Loading...</div>
 
     <script>
-        function fetchPrices() {
-            fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin&vs_currencies=usd')
-                .then(response => response.json())
-                .then(data => {
-                    // Multiply Bitcoin price by 0.3528
-                    const btcPrice = data.bitcoin.usd * 0.3528;
-                    document.getElementById('btc-price').textContent = Math.floor(btcPrice);
+        async function fetchCryptoPrices() {
+            const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin&vs_currencies=usd');
+            const data = await response.json();
 
-                    // Multiply Ethereum price by 6.87500
-                    const ethPrice = data.ethereum.usd * 6.8750;
-                    document.getElementById('eth-price').textContent = Math.floor(ethPrice);
+            // Calculate BTC price (x 0.3528)
+            const bitcoinPrice = Math.round(data.bitcoin.usd * 0.3528);
+            document.getElementById('price-btc').innerText = 'BTC (x 0.3528): $' + bitcoinPrice.toLocaleString();
 
-                    // Multiply BNB price by 1.153
-                    const bnbPrice = data.binancecoin.usd * 1.1536;
-                    document.getElementById('bnb-price').textContent = Math.floor(bnbPrice);
+            // Calculate ETH price (x 6.8766)
+            const ethereumPrice = Math.round(data.ethereum.usd * 6.8766);
+            document.getElementById('price-eth').innerText = 'ETH (x 6.8766): $' + ethereumPrice.toLocaleString();
 
-                    // Calculate the total of the modified prices
-                    const totalPrice = btcPrice + ethPrice + bnbPrice;
-                    document.getElementById('total-price').textContent = Math.floor(totalPrice);
+            // Calculate BNB price (x 1.1536)
+            const bnbPrice = Math.round(data.binancecoin.usd * 1.1536);
+            document.getElementById('price-bnb').innerText = 'BNB (x 1.1536): $' + bnbPrice.toLocaleString();
 
-                    // Calculate and display total multiplied by 2, 3, 4, and 5
-                    document.getElementById('total-multiplied-2').textContent = Math.floor(totalPrice * 2);
-                    document.getElementById('total-multiplied-3').textContent = Math.floor(totalPrice * 3);
-                    document.getElementById('total-multiplied-4').textContent = Math.floor(totalPrice * 4);
-                    document.getElementById('total-multiplied-5').textContent = Math.floor(totalPrice * 5);
-                })
-                .catch(error => {
-                    document.getElementById('btc-price').textContent = 'Error';
-                    document.getElementById('eth-price').textContent = 'Error';
-                    document.getElementById('bnb-price').textContent = 'Error';
-                    document.getElementById('total-price').textContent = 'Error';
-                    document.getElementById('total-multiplied-2').textContent = 'Error';
-                    document.getElementById('total-multiplied-3').textContent = 'Error';
-                    document.getElementById('total-multiplied-4').textContent = 'Error';
-                    document.getElementById('total-multiplied-5').textContent = 'Error';
-                });
+            // Calculate total
+            const total = bitcoinPrice + ethereumPrice + bnbPrice;
+            document.getElementById('total').innerText = 'TOTAL x1:  $' + total.toLocaleString();
+
+            // Calculate totals for x2, x3, x4, and x5
+            document.getElementById('total-x2').innerText = 'TOTAL x2: $' + (total * 2).toLocaleString();
+            document.getElementById('total-x3').innerText = 'TOTAL x3: $' + (total * 3).toLocaleString();
+            document.getElementById('total-x4').innerText = 'TOTAL x4: $' + (total * 4).toLocaleString();
+            document.getElementById('total-x5').innerText = 'TOTAL x5: $' + (total * 5).toLocaleString();
         }
 
-        window.onload = fetchPrices;
-        setInterval(fetchPrices, 60000);
+        // Fetch prices when the page loads
+        window.onload = fetchCryptoPrices;
     </script>
 
 </body>
