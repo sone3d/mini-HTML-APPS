@@ -26,7 +26,7 @@
             color: #333;
         }
         .calculator input {
-            width: 120px; /* Input box width */
+            width: 80px; /* Input box width */
             padding: 5px;
             margin: 10px 5px;
             border: 1px solid #ccc;
